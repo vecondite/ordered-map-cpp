@@ -44,6 +44,14 @@ template<typename kT, typename vT> class ordered_map{
                 locs.erase(val);
             }
         }
+        EntryIterator find(const kT& key) {
+            LocationIterator val = locs.find(key);
+            if(val!=locs.end()){
+                return val->second;
+            }else{
+                return data.end();
+            }
+        }
         EntryIterator begin() { return data.begin(); }
         EntryIterator end() { return data.end(); }
         CEntryIterator begin() const { return data.begin(); } 
