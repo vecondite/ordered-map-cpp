@@ -11,6 +11,7 @@ template<typename kT, typename vT> class ordered_map{
     using CEntryIterator = typename DataList::const_iterator;
     using LocationMap = std::unordered_map<kT, EntryIterator>;
     using LocationIterator = typename LocationMap::iterator;
+    using CLocationIterator = typename LocationMap::const_iterator;
     DataList data;
     LocationMap locs;
     public:
@@ -46,6 +47,14 @@ template<typename kT, typename vT> class ordered_map{
         }
         EntryIterator find(const kT& key) {
             LocationIterator val = locs.find(key);
+            if(val!=locs.end()){
+                return val->second;
+            }else{
+                return data.end();
+            }
+        }
+        CEntryIterator find(const kT& key) const {
+            CLocationIterator val = locs.find(key);
             if(val!=locs.end()){
                 return val->second;
             }else{
